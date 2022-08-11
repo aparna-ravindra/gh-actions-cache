@@ -61,7 +61,7 @@ jobs:
         run: |
           echo "$CacheKey"
           echo "$GITHUB_REF"
-          gh actions-cache list --key "$CacheKey" --limit 100 --branch "$GITHUB_REF" --order desc --sort created-at
+          gh actions-cache list 
           cache_found=$(gh actions-cache list --key $CacheKey --limit 100 --branch $GITHUB_REF --order desc --sort created-at | grep  $CacheKey)
           echo $cache_found
           [[ -z "$cache_found" ]] && exit 1 || echo "Cache List Successful"
