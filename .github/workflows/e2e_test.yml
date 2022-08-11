@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     name: cache upload (${{ matrix.os }})
     steps:
     - name: Create file to cache
@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     env:
       CacheKey: ${{ matrix.os }}-runner-${{ github.run_number }}-${{ github.run_attempt }}
@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_WRITE_TOKEN }}
         run: |
-          gh actions-cache --help
+          gh actions-cache list --help
       - name: List Command
         shell: bash
         env:
@@ -61,7 +61,7 @@ jobs:
         run: |
           echo "$CacheKey"
           echo "$GITHUB_REF"
-          gh actions-cache list --key $CacheKey --limit 100 --branch $GITHUB_REF --order desc --sort created-at | grep  $CacheKey
+          gh actions-cache list --key "$CacheKey" --limit 100 --branch "$GITHUB_REF" --order desc --sort created-at
           cache_found=$(gh actions-cache list --key $CacheKey --limit 100 --branch $GITHUB_REF --order desc --sort created-at | grep  $CacheKey)
           echo $cache_found
           [[ -z "$cache_found" ]] && exit 1 || echo "Cache List Successful"
