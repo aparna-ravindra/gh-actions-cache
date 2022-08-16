@@ -46,6 +46,9 @@ func FormatCacheSize(size_in_bytes float64) string {
 func PrettyPrintCacheList(caches []types.ActionsCache) {
 	terminal := ghTerm.FromEnv()
 	w, _, _ := terminal.Size()
+	fmt.Print("terminal.IsTerminalOutput()=")
+	fmt.Print(terminal.IsTerminalOutput())
+	fmt.Print("\n")
 	w = 200
 	tp := ghTableprinter.New(os.Stdout, true, w)
 
