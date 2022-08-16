@@ -52,7 +52,7 @@ func PrettyPrintCacheList(caches []types.ActionsCache) {
 	fmt.Print("terminal.IsTerminalOutput()=")
 	fmt.Print(terminal.IsTerminalOutput())
 	fmt.Print("\n")
-	if err != nil {
+	if terr != nil {
 		fmt.Println("Error occured while getting terminal size")
 		fmt.Print(terr)
         }
